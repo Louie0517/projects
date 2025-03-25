@@ -1,0 +1,127 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+struct Record {
+    string name;
+    int score = 0;
+};
+
+Record rec;
+
+class Arithmetic {
+  private:
+    int a, b, result;
+
+  public:
+    Arithmetic() {
+        srand(time(NULL)); 
+    }
+
+    int add() {
+        a = rand() % 100;
+        b = rand() % 100;
+        cout << "What is " << a << " + " << b << "? ";
+        result = a + b;
+        return result;
+    }
+
+    int subtract() {
+        a = rand() % 100;
+        b = rand() % 100;
+        cout << "What is " << a << " - " << b << "? ";
+        result = a - b;
+        return result;
+    }
+
+    int multiply() {
+        a = rand() % 100;
+        b = rand() % 100;
+        cout << "What is " << a << " * " << b << "? ";
+        result = a * b;
+        return result;
+    }
+
+    int divide() {
+        a = rand() % 100 + 1; 
+        b = rand() % 10 + 1;  
+        cout << "What is " << a << " / " << b << "? (Integer division) ";
+        result = a / b;
+        return result;
+    }
+};
+
+void menu(Arithmetic &arith) {
+    int choice, userAnswer, correctAnswer;
+    bool done = false;
+
+    while (!done) {
+        cout << "\n1. Addition\n2. Subtraction\n3. Multiplication\n4. Division\n5. Exit\n";
+        cout << "Choose an option: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                correctAnswer = arith.add();
+                cin >> userAnswer;
+                if (userAnswer == correctAnswer) {
+                    cout << "Correct!\n";
+                    rec.score++;
+                } else {
+                    cout << "Wrong. The correct answer was " << correctAnswer << ".\n";
+                }
+                break;
+            case 2:
+                correctAnswer = arith.subtract();
+                cin >> userAnswer;
+                if (userAnswer == correctAnswer) {
+                    cout << "Correct!\n";
+                    rec.score++;
+                } else {
+                    cout << "Wrong. The correct answer was " << correctAnswer << ".\n";
+                }
+                break;
+            case 3:
+                correctAnswer = arith.multiply();
+                cin >> userAnswer;
+                if (userAnswer == correctAnswer) {
+                    cout << "Correct!\n";
+                    rec.score++;
+                } else {
+                    cout << "Wrong. The correct answer was " << correctAnswer << ".\n";
+                }
+                break;
+            case 4:
+                correctAnswer = arith.divide();
+                cin >> userAnswer;
+                if (userAnswer == correctAnswer) {
+                    cout << "Correct!\n";
+                    rec.score++;
+                } else {
+                    cout << "Wrong. The correct answer was " << correctAnswer << ".\n";
+                }
+                break;
+            case 5:
+                done = true;
+                cout << "\nThank you for playing, " << rec.name << "!\n";
+                cout << "Your final score is: " << rec.score << "\n";
+                break;
+            default:
+                cout << "Invalid option. Please try again.\n";
+                break;
+        }
+    }
+}
+
+void getUserInfo() {
+    cout << "Enter your name: ";
+    cin >> rec.name;
+}
+
+int main() {
+    Arithmetic arith;
+    getUserInfo();
+    menu(arith);
+    return 0;
+}
